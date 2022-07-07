@@ -1,24 +1,33 @@
-import logo from './logo.svg';
 import './App.css';
+import Grid from '@mui/material/Grid';
+import TextField from './components/TextField';
+import Button from './components/Button';
+import Checkbox from './components/Checkbox';
+import Switch from './components/Switch';
 
 function App() {
+
+const selectedComponents = [
+    <TextField />,
+    <Button/>,
+    <Checkbox/>,
+    <Switch/>
+];
+
+const flexAlignmentOptions = [
+  "flex-start",
+  "flex-end",
+  "center"
+]
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Grid container spacing={5}>
+        {selectedComponents&&Array(Math.floor(Math.random() * (50 - 5 + 1)) + 5).fill().map((_,i)=>{
+            return <Grid item xs={Math.ceil(Math.random()*2)} key={i} sx={{ border:"1px solid", display:"flex", alignItems:`${flexAlignmentOptions[Math.floor(Math.random()*3)]}`, justifyContent:`${flexAlignmentOptions[Math.floor(Math.random()*3)]}`}}>
+              {selectedComponents[Math.floor(Math.random()*(selectedComponents.length))]}
+            </Grid>
+        })}
+    </Grid>
   );
 }
 
